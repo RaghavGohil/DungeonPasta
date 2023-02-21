@@ -1,11 +1,35 @@
 #include<iostream>
-#include<string.h>
-#include "../inc/SDL2/include/SDL.h"
+#include <SDL.h>
+#include <string.h>
+#include <windows.h>
 
-int main(int argc,char *argv[])
-{
-    std::cout << "Hello World!";
-    SDL_Init(SDL_INIT_EVERYTHING);
-    SDL_Window *window = SDL_CreateWindow("title",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,600,400,SDL_WINDOW_SHOWN);
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 480
+#define TITLE "game"
+
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hpInstance, LPSTR nCmdLine, int iCmdShow)
+{   
+
+    //create window and surface.
+    SDL_Window *window = NULL;
+    SDL_Surface *screenSurface = NULL;
+
+    //init sdl(without initializing you cannot call the sdl functions).
+    if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
+    {
+        std::cout << "SDL could not be initialized. " ;//<< SDL_GetError() << std::endl;
+    }
+
+    else
+    {
+        //Create window
+        window = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+        
+        if( window == NULL )
+        {
+            std::cout << "Window could not be created. " << SDL_GetError() << std::endl;
+        }
+    }
+
     return 0;
 }
