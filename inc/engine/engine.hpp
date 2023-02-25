@@ -3,6 +3,9 @@
 
 #include<renderer.hpp>
 #include<config.hpp>
+#include<log.hpp>
+
+#include<iostream.h>
 #include<../sdl/sdl.h>
 
 namespace engine
@@ -13,13 +16,12 @@ namespace engine
 
             Engine(Config &config);
             ~Engine();
-            void init();
 
-            SDL_Window* window() const;
-            //-
-
+            void initializeSDL() const;
+            SDL_Window* createWindow() const;
         private:
-            //-
+            // Is the engine initialized?
+            bool m_init;
     };
 }
 
