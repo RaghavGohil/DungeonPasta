@@ -7,10 +7,13 @@
 #define SCREEN_HEIGHT 480
 #define TITLE "game"
 
-bool init();
-bool loadMedia();
-void close();
+//functions:
+bool init();//initializes sdl and creates a window for us.
+bool loadMedia();//creates a surface and loads an image on the surface.
+SDL_Surface* loadImgSurface( std::string path );//creates a sdl surface and return a pointer to it.
+void close();//closes the application after freeing the data.
 
+//initialization:
 //The window we'll be rendering to
 SDL_Window* gWindow = NULL;
     
@@ -20,45 +23,52 @@ SDL_Surface* gScreenSurface = NULL;
 //The image we will load and show on the screen
 SDL_Surface* gHelloWorld = NULL;
 
+//Current displayed image
+SDL_Surface* gCurrentSurface = NULL;
+
+//entry point.
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hpInstance, LPSTR nCmdLine, int iCmdShow)
 {   
-
     if(!init())
     {
-
-        std::cout << "Failed to initialize!" << std::endl;
-
+        std::cout << "Failed to initialize!\n";
     }
 
     else
     {
-
         if(!loadMedia())
         {
-
-            std::cout << "Unable to load media!" << std::endl;
-
+            std::cout << "Unable to load media!\n";
         }
 
         else
         {
-
             SDL_BlitSurface(gHelloWorld,NULL,gScreenSurface,NULL);
             SDL_UpdateWindowSurface( gWindow );
-            SDL_Event e; bool quit = false; while( quit == false ){ while( SDL_PollEvent( &e ) ){ if( e.type == SDL_QUIT ) quit = true; }} //our hack
+            
+            SDL_Event e; 
+            bool quit = false;
+            
+            while( quit == false )
+            {
+                while( SDL_PollEvent( &e ) )
+                { 
+                    if( e.type == SDL_QUIT )
+                        quit = true;
+                    if( e.type == SDL_KEYDOWN )
+                        SDL_Log("User pressed a key.\n");//use the log function as by default in a window application it doesn't print out to the console. 
+                }
+            }
         }
-
     }
 
     close();
 
     return 0;
-
 }
 
 bool init()
 {
-   
     //Initialization flag
     bool success = true;
 
@@ -86,16 +96,14 @@ bool init()
     }
 
     return success;
-
 }
 
 bool loadMedia()
 {
-
     bool success = true;
 
     //Load splash image
-    gHelloWorld = SDL_LoadBMP( "C://Users/Mira.H.Gohil/Desktop/monke.bmp" );
+    gHelloWorld = loadImgSurface("C://Users/Mira.H.Gohil/Desktop/monke.bmp");
     if( gHelloWorld == NULL )
     {
         std::cout << "Couldn't load media. " << SDL_GetError() << std::endl;
@@ -103,16 +111,26 @@ bool loadMedia()
     }
 
     return success;
+}
 
+SDL_Surface* loadImgSurface(std::string path)
+{
+    //load the surface at path.
+    SDL_Surface* surface = SDL_LoadBMP(path.c_str());
+
+    if(surface == NULL)
+    {
+        std::cout<<"Unable to load surface at: "<<path.c_str()<<std::endl;
+    }
+
+    return surface;
 }
 
 void close()
 {
-
     SDL_FreeSurface( gHelloWorld );
     gHelloWorld = NULL;
     SDL_DestroyWindow( gWindow );
     gWindow = NULL;
     SDL_Quit();
-
 }
