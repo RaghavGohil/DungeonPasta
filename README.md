@@ -2,6 +2,8 @@
 # learningsdl 
 
 * This is a sandbox to try and test the features of sdl to grasp a firm understanding of what's going on behind the scenes.
+* As I am learning c++ with this project, I am learning the microsoft naming conventions too. Please research about MS c++ naming conventions.
+* functions start with &lt;return type&gt; fn&lt;type&gt;foo();
 
 # p.s. 
 
