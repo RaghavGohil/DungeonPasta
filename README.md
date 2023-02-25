@@ -1,9 +1,7 @@
 
-# learningsdl 
+# Learning sdl whilst making a small game engine that runs my small game. 
 
-* This is a sandbox to try and test the features of sdl to grasp a firm understanding of what's going on behind the scenes.
-* As I am learning c++ with this project, I am learning the microsoft naming conventions too. Please research about MS c++ naming conventions.
-* functions start with &lt;return type&gt; fn&lt;type&gt;foo();
+*I am trying to implement a game engine in c++ that makes it easier for me to make games in 2D with sdl.
 
 # p.s. 
 
