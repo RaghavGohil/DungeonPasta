@@ -43,7 +43,21 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hpInstance, LPSTR nCmdLine, in
 
         else
         {
-            SDL_BlitSurface(gHelloWorld,NULL,gScreenSurface,NULL);
+
+            //Apply the image stretched
+			SDL_Rect stretch_rect;
+			stretch_rect.x = 0;
+			stretch_rect.y = 0;
+			stretch_rect.w = SCREEN_WIDTH;
+			stretch_rect.h = SCREEN_HEIGHT;
+            //sourcerect
+            SDL_Rect src_rect;
+            src_rect.x = 0;
+			src_rect.y = 0;
+			src_rect.w = 500;
+			src_rect.h = 300;
+			SDL_BlitScaled( gHelloWorld,&src_rect, gScreenSurface, &stretch_rect );
+            // SDL_BlitSurface(gHelloWorld,NULL,gScreenSurface,NULL);
             SDL_UpdateWindowSurface( gWindow );
             
             SDL_Event e; 
@@ -123,7 +137,17 @@ SDL_Surface* loadImgSurface(std::string path)
         std::cout<<"Unable to load surface at: "<<path.c_str()<<std::endl;
     }
 
-    return surface;
+    SDL_Surface* optimized_surface = SDL_ConvertSurface(surface,gScreenSurface->format,0);
+
+    if(optimized_surface == NULL)
+    {
+        std::cout<<"Unable to load optimized surface at: "<<path.c_str()<<std::endl;
+    }
+
+    else
+        SDL_FreeSurface(surface);
+
+    return optimized_surface;
 }
 
 void close()
