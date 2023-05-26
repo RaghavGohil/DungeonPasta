@@ -1,7 +1,7 @@
 
 # Learning sdl whilst making a small game engine that runs my small game. 
 
-*I am trying to implement a game engine in c++ that is built upon the SDL library.
+*I am trying to implement a game engine in c++ that makes it easier for me to make games in 2D with sdl.
 
 # p.s. 
 
