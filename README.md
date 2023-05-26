@@ -1,5 +1,8 @@
 
 # Trying to make a light-weight 2D engine with sdl and imgui.
+Even made the artwork lmao.
+
+![gummy](https://github.com/RaghavGohil/Gummy/assets/71706645/17926562-a70c-4d5d-8039-0f0b1f87e179)
 
 # p.s. 
 
