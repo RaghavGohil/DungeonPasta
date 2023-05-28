@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include<windows.h>
 #include<window.h>
+#include<renderer.h>
 
 //Screen dimension constants
 #define SCREEN_WIDTH 512
@@ -28,6 +29,14 @@ bool loadMedia()
     return success;
 }
 
+void close(Window *window,Renderer *renderer)
+{
+	renderer->shutdown();
+	window->shutdown();
+	delete renderer;
+	delete window;
+}
+
 int WINAPI WinMain(HINSTANCE hInstance,
                    HINSTANCE hPrevInstance,
                    LPSTR lpCmdLine,
@@ -35,6 +44,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 {
 
 	Window *gWindow = new Window(SCREEN_WIDTH,SCREEN_HEIGHT,"Torch");
+	Renderer *gRenderer = new Renderer();
 	if(gWindow->init())	
 	{
 		if(!loadMedia())
@@ -43,6 +53,10 @@ int WINAPI WinMain(HINSTANCE hInstance,
 		}
 		else
 		{
+			if(gRenderer->init(gWindow->window,-1))
+			{
+					
+			}
 			SDL_BlitSurface(gHelloWorld,NULL,gScreenSurface,NULL);
 			SDL_UpdateWindowSurface(gWindow->window);
 			SDL_Event e;
@@ -50,7 +64,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 		}
 	}
 
-	delete gWindow;	
+	close(gWindow,gRenderer);	
 	//Deallocate surface
     	SDL_FreeSurface( gHelloWorld );
     	gHelloWorld = NULL;

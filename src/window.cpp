@@ -17,7 +17,7 @@ bool Window::init()
 {
 	if(SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
-		SDL_Log("Failed to initialize SDL.");
+		SDL_Log("Failed to initialize SDL. ");
 		return false;
 	}
 	else
@@ -25,7 +25,7 @@ bool Window::init()
 		Window::window = SDL_CreateWindow(title,SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,Window::width,Window::height,SDL_WINDOW_SHOWN);
 		if(window==nullptr)
 		{
-			SDL_Log("Failed to create window.");
+			SDL_Log("Failed to create window. ");
 			return false;
 		}
 	}

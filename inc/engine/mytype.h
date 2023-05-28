@@ -1,6 +1,7 @@
 #ifndef MYTYPE
 #define MYTYPE
-#include <ctype.h>
+#include<cstdint>
+#include<ctype.h>
 
 typedef float    f32;
 typedef double   f64;
