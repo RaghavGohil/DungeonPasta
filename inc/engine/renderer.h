@@ -1,7 +1,10 @@
 #ifndef RENDERER
 #define RENDERER
-#include<mytype.h>
 #include<SDL.h>
+#include<stdio.h>
+#include<SDL_image.h>
+#include<mytype.h>
+
 class Renderer
 {
 	public:
@@ -11,8 +14,7 @@ class Renderer
 		void shutdown();
 		
 		SDL_Renderer *renderer;
-
-		void renderTexture();
+		SDL_Texture* createTexture(const char*);
 };
 
 #endif 

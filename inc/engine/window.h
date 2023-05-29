@@ -1,6 +1,9 @@
 #ifndef WINDOW
 #define WINDOW
 #include<mytype.h>
+#include<SDL.h>
+#include<stdio.h>
+
 class Window
 {
 	public:
@@ -8,8 +11,8 @@ class Window
 		~Window();
 		bool init();
 		void shutdown();
-		void checkEvent(SDL_Event*);
 		SDL_Window *window;
+
 	private:
 		u16 width,height;
 		const char *title;
