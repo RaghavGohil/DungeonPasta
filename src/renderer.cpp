@@ -65,4 +65,5 @@ void Renderer::shutdown()
 {
 	SDL_DestroyRenderer(Renderer::renderer);
 	renderer = nullptr;
+	IMG_Quit();
 }
