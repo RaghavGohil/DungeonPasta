@@ -9,6 +9,7 @@ class Window
 	public:
 		Window(u16,u16,const char*);
 		~Window();
+
 		bool init();
 		void shutdown();
 		SDL_Window *window;

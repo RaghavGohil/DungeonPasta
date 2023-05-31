@@ -11,9 +11,8 @@ Renderer::~Renderer()
 
 bool Renderer::init(SDL_Window *window,i8 driver)
 {
-	printf("Initializing renderer.");
 	//Always on accelerated boiss
-	Renderer::renderer = SDL_CreateRenderer(window,driver,SDL_RENDERER_ACCELERATED);
+	this->renderer = SDL_CreateRenderer(window,driver,SDL_RENDERER_ACCELERATED);
 	if(renderer == nullptr)
 	{
 		printf("Failed to initialize renderer. ");
@@ -39,31 +38,10 @@ bool Renderer::init(SDL_Window *window,i8 driver)
 	return true;
 }
 
-SDL_Texture* Renderer::createTexture(const char* path)
-{
-	SDL_Surface *surface = IMG_Load(path); 
-	if(surface == nullptr)
-	{
-		printf("Failed to load specified image."); // todo: add path
-		return nullptr;
-	}
-	else
-	{
-		SDL_Texture *texture = SDL_CreateTextureFromSurface(Renderer::renderer,surface);
-		if(texture == nullptr)
-		{
-			printf("Failed to load texture from surface."); // todo: add path
-			return nullptr;
-		}
-		SDL_FreeSurface(surface);
-		return texture;
-	}	
-	
-}
 
 void Renderer::shutdown()
 {
-	SDL_DestroyRenderer(Renderer::renderer);
+	SDL_DestroyRenderer(this->renderer);
 	renderer = nullptr;
 	IMG_Quit();
 }

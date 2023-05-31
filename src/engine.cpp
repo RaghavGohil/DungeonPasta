@@ -1,6 +1,7 @@
 #include<SDL.h>
 #include<window.h>
 #include<renderer.h>
+#include<texture.h>
 #include<stdio.h>
 
 //Screen dimension constants
@@ -9,47 +10,37 @@
 
 SDL_Texture *gTexture = nullptr;
 
-void close(Window *window,Renderer *renderer)
-{
-	renderer->shutdown();
-	window->shutdown();
-	delete renderer;
-	delete window;
-}
-
 int main(int argc,char *args[])
 {
-	Window *gWindow = new Window(SCREEN_WIDTH,SCREEN_HEIGHT,"Torch");
+	Window *gWindow = new Window(SCREEN_WIDTH,SCREEN_HEIGHT,"Game");
 	Renderer *gRenderer = new Renderer();
-
-	if(gWindow->init())	
+	Texture *gTexture = new Texture(100,100,"../img/monke.png");
+	if(!gWindow->init()){ return -1; }
+	if(!gRenderer->init(gWindow->window,-1)) { return -1; }
+	if(!gTexture->init(gRenderer->renderer)) { return -1; }
+	SDL_Event e;
+	bool quit = false;
+	while(!quit)
 	{
-		if(gRenderer->init(gWindow->window,-1))
+		while(SDL_PollEvent(&e))
 		{
-			gTexture = gRenderer->createTexture("../img/torch.png");
-		}
-		SDL_Event e;
-		bool quit = false;
-		while(!quit)
-		{
-			while(SDL_PollEvent(&e))
+			if(e.type == SDL_QUIT)
 			{
-				if(e.type == SDL_QUIT)
-				{
-					quit = true;
-					gWindow->shutdown();	
-				}	
-				
-			}
-                	SDL_RenderClear(gRenderer->renderer);
-               		SDL_RenderCopy(gRenderer->renderer,gTexture,NULL,NULL);
-                	SDL_RenderPresent(gRenderer->renderer);
+				quit = true;
+				gWindow->shutdown();	
+			}	
+			
 		}
-
+		SDL_RenderClear(gRenderer->renderer);
+		gTexture->render(gRenderer->renderer,100,100);
+		SDL_RenderPresent(gRenderer->renderer);
 	}
-
-	close(gWindow,gRenderer);	
-	SDL_DestroyTexture(gTexture);
+	gTexture->free();
+	gRenderer->shutdown();
+	gWindow->shutdown();
+	delete gTexture;
+	delete gRenderer;
+	delete gWindow;
 	return 0;
 
 }

@@ -14,7 +14,6 @@ Window::~Window()
 
 bool Window::init()
 {
-	printf("Initializing window.");
 	if(SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		printf("Failed to initialize SDL.");

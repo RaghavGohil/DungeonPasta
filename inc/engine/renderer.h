@@ -10,11 +10,10 @@ class Renderer
 	public:
 		Renderer();
 		~Renderer();
+		
 		bool init(SDL_Window*,i8);
 		void shutdown();
 		
 		SDL_Renderer *renderer;
-		SDL_Texture* createTexture(const char*);
 };
-
 #endif 
