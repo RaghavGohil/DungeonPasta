@@ -1,1 +1,1 @@
-# Behold my Torch!
+# The Sun Vanished
