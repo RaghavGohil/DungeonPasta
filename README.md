@@ -1,14 +1,8 @@
 
-# Trying to make a 2D game with SDL because low level programming suki.
+# RoboLove is a 2D game which is made with SDL.
 
-# Previsouly on the show: 
-
-It's more like I am running away from life when I do stuff like this.. I have a website to create (and a game) and deviations like these never stop.. smh pls.
-I have my sem exams coming up too. Next up, after learning sdl, we will design conways game of life without giving a shit about life.
-
-update:
-I finished conway's game of life.
+# Finally back to game development!!! Hell yeah!
+So it's been a long time since I have developed a game or even touched a game. I was pretty busy with my website, but now that work's all over. Really excited to begin a new project!
 
 # Developer contact:-
-
 * Contact at raghavgohil2004@gmail.com.
