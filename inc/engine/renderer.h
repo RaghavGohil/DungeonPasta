@@ -1,19 +1,17 @@
-#ifndef RENDERER
-#define RENDERER
+#pragma once
 #include<SDL.h>
 #include<stdio.h>
 #include<SDL_image.h>
-#include<mytype.h>
+#include<mytypes.h>
 
 class Renderer
 {
 	public:
-		Renderer();
-		~Renderer();
+		Renderer(void);
+		~Renderer(void);
 		
-		bool init(SDL_Window*,i8);
-		void shutdown();
+		bool init(SDL_Window* fwindow,const i8 fdriver);
+		void free(void);
 		
 		SDL_Renderer *renderer;
 };
-#endif 

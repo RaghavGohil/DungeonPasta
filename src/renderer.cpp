@@ -1,18 +1,18 @@
 #include<renderer.h>
 
-Renderer::Renderer()
+Renderer::Renderer(void)
 {
 	//
 }
-Renderer::~Renderer()
+Renderer::~Renderer(void)
 {
-	Renderer::shutdown();	
+	Renderer::free();	
 }
 
-bool Renderer::init(SDL_Window *window,i8 driver)
+bool Renderer::init(SDL_Window *fwindow,const i8 fdriver)
 {
 	//Always on accelerated boiss
-	this->renderer = SDL_CreateRenderer(window,driver,SDL_RENDERER_ACCELERATED);
+	this->renderer = SDL_CreateRenderer(fwindow,fdriver,SDL_RENDERER_ACCELERATED);
 	if(renderer == nullptr)
 	{
 		printf("Failed to initialize renderer. ");
@@ -21,7 +21,7 @@ bool Renderer::init(SDL_Window *window,i8 driver)
 	else
 	{
 		// set the renderer color so that we know that the renderer is set up
-		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); 			
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); 			
 
 		// initialize the image loader
 
@@ -39,7 +39,7 @@ bool Renderer::init(SDL_Window *window,i8 driver)
 }
 
 
-void Renderer::shutdown()
+void Renderer::free(void)
 {
 	SDL_DestroyRenderer(this->renderer);
 	renderer = nullptr;

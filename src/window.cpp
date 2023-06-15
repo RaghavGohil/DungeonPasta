@@ -1,18 +1,18 @@
 #include<window.h>
 
-Window::Window(u16 width,u16 height,const char *title)
+Window::Window(const u16 fwidth,const u16 fheight,const char *ftitle)
 {
-	Window::width = width;
-	Window::height = height;
-	Window::title = title;
+	this->width = fwidth;
+	this->height = fheight;
+	this->title = ftitle;
 }
 
-Window::~Window()
+Window::~Window(void)
 {
-	Window::shutdown();	
+	Window::free();	
 }
 
-bool Window::init()
+bool Window::init(void)
 {
 	if(SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -31,7 +31,7 @@ bool Window::init()
 	return true;	
 }
 
-void Window::shutdown()
+void Window::free(void)
 {
 	Window::title = nullptr;
 	SDL_DestroyWindow(Window::window);

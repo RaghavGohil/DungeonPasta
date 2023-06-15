@@ -2,6 +2,7 @@
 #include<window.h>
 #include<renderer.h>
 #include<texture.h>
+#include<entity.h>
 #include<stdio.h>
 
 //Screen dimension constants
@@ -12,33 +13,38 @@ SDL_Texture *gTexture = nullptr;
 
 int main(int argc,char *args[])
 {
-	Window *gWindow = new Window(SCREEN_WIDTH,SCREEN_HEIGHT,"Game");
+	Window *gWindow = new Window(SCREEN_WIDTH,SCREEN_HEIGHT,"RoboLove");
 	Renderer *gRenderer = new Renderer();
-	Texture *gTexture = new Texture(100,100,"../img/monke.png");
+
 	if(!gWindow->init()){ return -1; }
 	if(!gRenderer->init(gWindow->window,-1)) { return -1; }
-	if(!gTexture->init(gRenderer->renderer)) { return -1; }
+	
+	Entity *et = new Entity(gRenderer->renderer,"../img/player/player_front.png");
+
 	SDL_Event e;
 	bool quit = false;
+
 	while(!quit)
 	{
 		while(SDL_PollEvent(&e))
 		{
-			if(e.type == SDL_QUIT)
-			{
-				quit = true;
-				gWindow->shutdown();	
-			}	
+			SDL_RenderClear(gRenderer->renderer);
+			et->texture->render(gRenderer->renderer,0,0,0,0,5*5,10*5);
+			SDL_RenderPresent(gRenderer->renderer);
 			
+			switch(e.type)
+			{
+				case SDL_QUIT:
+					quit = true;
+					gWindow->free();	
+			}	
 		}
-		SDL_RenderClear(gRenderer->renderer);
-		gTexture->render(gRenderer->renderer,100,100);
-		SDL_RenderPresent(gRenderer->renderer);
 	}
-	gTexture->free();
-	gRenderer->shutdown();
-	gWindow->shutdown();
-	delete gTexture;
+
+	et->free();
+	gRenderer->free();
+	gWindow->free();
+	delete et;
 	delete gRenderer;
 	delete gWindow;
 	return 0;
