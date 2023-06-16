@@ -13,6 +13,7 @@ class Texture
 		bool init(SDL_Renderer* frenderer);
 		void render(SDL_Renderer* frenderer,i16 fsrc_x,i16 fsrc_y,i16 fdest_x,i16 fdest_y,u16 fw,u16 fh);
 		void free(void);
+	private:
 		const char *path;
 		SDL_Texture *texture;
 };

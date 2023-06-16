@@ -38,6 +38,10 @@ bool Renderer::init(SDL_Window *fwindow,const i8 fdriver)
 	return true;
 }
 
+SDL_Renderer* Renderer::getRenderer(void)
+{
+	return this->renderer;
+}
 
 void Renderer::free(void)
 {

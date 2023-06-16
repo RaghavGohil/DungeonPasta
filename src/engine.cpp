@@ -19,7 +19,7 @@ int main(int argc,char *args[])
 	if(!gWindow->init()){ return -1; }
 	if(!gRenderer->init(gWindow->window,-1)) { return -1; }
 	
-	Entity *et = new Entity(gRenderer->renderer,"../img/player/player_front.png");
+	Entity *entity = new Entity(gRenderer->getRenderer(),"../img/player/player_front.png");
 
 	SDL_Event e;
 	bool quit = false;
@@ -28,9 +28,9 @@ int main(int argc,char *args[])
 	{
 		while(SDL_PollEvent(&e))
 		{
-			SDL_RenderClear(gRenderer->renderer);
-			et->texture->render(gRenderer->renderer,0,0,0,0,5*5,10*5);
-			SDL_RenderPresent(gRenderer->renderer);
+			SDL_RenderClear(gRenderer->getRenderer());
+			entity->texture->render(gRenderer->getRenderer(),0,0,0,0,5*5,10*5);
+			SDL_RenderPresent(gRenderer->getRenderer());
 			
 			switch(e.type)
 			{
@@ -41,10 +41,10 @@ int main(int argc,char *args[])
 		}
 	}
 
-	et->free();
+	entity->free();
 	gRenderer->free();
 	gWindow->free();
-	delete et;
+	delete entity;
 	delete gRenderer;
 	delete gWindow;
 	return 0;

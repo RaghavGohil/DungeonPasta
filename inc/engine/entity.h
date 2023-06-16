@@ -4,6 +4,7 @@
 #include<stdio.h>
 #include<texture.h>
 #include<assert.h>
+#include<mymath.h>
 
 class Entity
 {
@@ -13,25 +14,19 @@ class Entity
         ~Entity();
 
         //getters
-        i16 getSrcX()  const;
-        i16 getSrcY()  const;
-        i16 getDestX() const;
-        i16 getDestY() const;
-        i16 getW() const;
-        i16 getH() const;
+        Vec2 getSrcVec()  const;
+        Vec2 getDestVec() const;
+        Vec2 getDimVec() const;
+	
         //setters
-        void setSrcX(i16 fsrc_x);
-        void setSrcY(i16 fsrc_y);
-        void setDestX(i16 fdest_x);
-        void setDestY(i16 fdest_y);
-        void setW(i16 fw);
-        void setH(i16 fh);
+        void setSrcVec(Vec2 fsrc_vec);
+        void setDestVec(Vec2 fdest_vec);
+        void setDimVec(Vec2 fdim_vec);
 
         Texture *texture;
-
         void free();
     
     private:
-        i16 src_x,src_y,dest_x,dest_y,w,h;
+	Vec2 src_vec,dest_vec,dim_vec;//dim vec contains the width and the height
         const char *path;
 };

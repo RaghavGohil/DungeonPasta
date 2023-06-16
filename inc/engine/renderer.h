@@ -11,7 +11,11 @@ class Renderer
 		~Renderer(void);
 		
 		bool init(SDL_Window* fwindow,const i8 fdriver);
+
+		//getters:
+		SDL_Renderer* getRenderer(void);
+			
 		void free(void);
-		
+	private:
 		SDL_Renderer *renderer;
 };
